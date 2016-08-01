@@ -3,13 +3,23 @@ const { app, BrowserWindow } = require('electron');
 let win;
 
 const createWindow = () => {
-  win = new BrowserWindow({ width: 640, height: 480, frame: false });
+  win = new BrowserWindow({
+    width: 640,
+    height: 480,
+    frame: false,
+    webPreferences: {
+      plugins: true,
+    },
+  });
   win.loadURL(`file://${__dirname}/index.html`);
   win.on('closed', () => {
     win = null;
   });
+  win.show();
 };
 
+app.commandLine.appendSwitch('widevine-cdm-path', `${__dirname}/plugins/widevinecdmadapter.plugin`);
+app.commandLine.appendSwitch('widevine-cdm-version', '1.4.8.903');
 app.on('ready', createWindow);
 
 app.on('window-all-closed', () => {
