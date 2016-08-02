@@ -19,6 +19,7 @@ const createWindow = () => {
     const calculatedWidth = Math.floor(winSize.width * (16 / 9));
     const calculatedHeight = Math.floor(winSize.height * (16 / 9));
     win.setSize(Math.min(calculatedWidth, 1024), Math.min(calculatedHeight, 576));
+    win.center();
   });
 
   globalShortcut.register('CommandOrControl+Shift+Down', () => {
@@ -26,6 +27,7 @@ const createWindow = () => {
     const calculatedWidth = Math.floor(winSize.width * (9 / 16));
     const calculatedHeight = Math.floor(winSize.height * (9 / 16));
     win.setSize(Math.max(calculatedWidth, 256), Math.max(calculatedHeight, 144));
+    win.center();
   });
 
   globalShortcut.register('CommandOrControl+Shift+Right', () => {
