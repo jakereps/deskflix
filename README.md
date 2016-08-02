@@ -36,8 +36,11 @@ npm run build:mac
 
 *This functionality is still in progress*
 
-`ctrl + plus: increase screen size`
+***increase screen size***  
+`ctrl/cmd + shift + up`
 
-`ctrl + minus: decrease screen size`
+***decrease screen size***  
+`ctrl/cmd + shift + down`
 
-`ctrl + q: quit`
+***quit: while not in focus***  
+`ctrl/cmd + shift + right`
