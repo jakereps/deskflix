@@ -8,7 +8,7 @@ Desktop viewer for Netflix
 
 ### Installation
 <small>
-    ***This currently only works for OS X. I don't have access to the plugins for other platforms, please submit a pull-request if you have access to them and update the `main.js` to use the correct one for your platform!***
+    ***OSs other than OS X are currently experimental. Please file any relevant issues to our GitHub issue tracker, or feel free to fix it and submit a pull request.***
 </small>
 
 - *"Dev" mode:*
