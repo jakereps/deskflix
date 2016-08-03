@@ -55,22 +55,30 @@ const errorMessage = 'Something went wrong while trying to find your WideVineCDM
 // 'aix', 'darwin', 'freebsd', 'linux', 'openbsd', 'sunos', 'win32'
 switch (os.platform()) {
   case 'darwin': {
-    // create the glob path
     dirGlob = `${homeDir}/Library/Application\ Support/Google/Chrome/**/widevinecdmadapter.plugin`;
-    const files = glob.sync(dirGlob);
-    // make sure something was returned
-    if (files.length) {
-      wideVinePluginPath = files[0];
-      splitPath = wideVinePluginPath.split('/');
-      // grab the version string from the returned filepath
-      wideVineVersion = splitPath[splitPath.length - 4];
-    } else {
-      throw new Error(errorMessage);
-    }
+    break;
+  }
+  case 'win32': {
+    dirGlob = `${homeDir}/AppData/Local/Google/Chrome/**/widevinecdmadapter.dll`;
+    break;
+  }
+  case 'linux': {
+    dirGlob = '/opt/google/chrome/**/libwidevinecdmadapter.so';
     break;
   }
   default:
     throw new Error('Not a valid platform to run on!');
+}
+
+const files = glob.sync(dirGlob);
+// make sure something was returned
+if (files.length) {
+  wideVinePluginPath = files[0];
+  splitPath = wideVinePluginPath.split('/');
+  // grab the version string from the returned filepath
+  wideVineVersion = splitPath[splitPath.length - 4];
+} else {
+  throw new Error(errorMessage);
 }
 
 app.commandLine.appendSwitch('widevine-cdm-path', wideVinePluginPath);
