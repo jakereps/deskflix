@@ -1,5 +1,6 @@
 const { app, BrowserWindow, globalShortcut } = require('electron');
 const os = require('os');
+const glob = require('glob');
 
 let win;
 
@@ -39,16 +40,35 @@ const createWindow = () => {
   win.show();
 };
 
+const homeDir = process.env.HOME;
 let wideVinePluginPath;
+let splitPath;
 let wideVineVersion;
+let dirGlob;
+
+const errorMessage = 'Something went wrong while trying to find your WideVineCDM ' +
+  'plugin location. Please make sure you have Google Chrome installed, and an up-to-date ' +
+  'version of the WideVineCDM plugin, found at Chrome://plugins. If both conditions ' +
+  'are already met, open an issue on GitHub at https://github.com/jakereps/deskflix';
 
 // switch for os.platform w/ Node 6.x available platforms being:
 // 'aix', 'darwin', 'freebsd', 'linux', 'openbsd', 'sunos', 'win32'
 switch (os.platform()) {
-  case 'darwin':
-    wideVinePluginPath = `${__dirname}/plugins/widevinecdmadapter.plugin`;
-    wideVineVersion = '1.4.8.903';
+  case 'darwin': {
+    // create the glob path
+    dirGlob = `${homeDir}/Library/Application\ Support/Google/Chrome/**/widevinecdmadapter.plugin`;
+    const files = glob.sync(dirGlob);
+    // make sure something was returned
+    if (files.length) {
+      wideVinePluginPath = files[0];
+      splitPath = wideVinePluginPath.split('/');
+      // grab the version string from the returned filepath
+      wideVineVersion = splitPath[splitPath.length - 4];
+    } else {
+      throw new Error(errorMessage);
+    }
     break;
+  }
   default:
     throw new Error('Not a valid platform to run on!');
 }
