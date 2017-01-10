@@ -4,9 +4,7 @@
   "description": "Desktop viewer for Netflix",
   "main": "app/main.js",
   "scripts": {
-    "lint": "eslint app/ config/ --ext .js,.jsx",
-    "pretest": "npm run lint --silent",
-    "test": "mocha --compilers js:babel-core/register --recursive",
+    "test": "eslint app/ --ext .js,.jsx",
     "build:mac": "electron-packager . --platform=darwin --arch=x64",
     "start": "electron ."
   },
@@ -25,11 +23,6 @@
   },
   "homepage": "https://github.com/jakereps/deskflix#readme",
   "devDependencies": {
-    "babel-cli": "^6.11.4",
-    "babel-core": "^6.11.4",
-    "babel-loader": "^6.2.4",
-    "babel-preset-es2015": "^6.9.0",
-    "chai": "^3.5.0",
     "electron-packager": "^7.4.0",
     "electron-prebuilt": "^1.3.1",
     "eslint": "^2.13.1",
@@ -37,8 +30,12 @@
     "eslint-plugin-import": "^1.12.0",
     "eslint-plugin-jsx-a11y": "^1.5.5",
     "eslint-plugin-react": "^5.2.2",
-    "glob": "^7.0.5",
-    "mocha": "^3.0.0",
-    "webpack": "^1.13.1"
+    "glob": "^7.0.5"
+  },
+  "eslintConfig": {
+    "extends": "airbnb",
+    "settings": {
+      "import/core-modules": ["electron"]
+    }
   }
 }
