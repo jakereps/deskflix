@@ -77,6 +77,12 @@ if (files.length) {
   splitPath = wideVinePluginPath.split('/');
   // grab the version string from the returned filepath
   wideVineVersion = splitPath[splitPath.length - 4];
+} else if (!files.length && os.platform() === 'darwin') {
+  // unsure when, but in recent OSX Chrome versions WideVine isn't where it used to be
+  dirGlob = '/Applications/Google Chrome.app/Contents/Versions/**/widevinecdmadapter.plugin';
+  wideVineVersion = '1.4.8.903';
+  const alternateFiles = glob.sync(dirGlob);
+  wideVinePluginPath = alternateFiles[0];
 } else {
   throw new Error(errorMessage);
 }
