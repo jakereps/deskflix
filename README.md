@@ -7,9 +7,9 @@ Desktop viewer for Netflix
 ---
 
 <p align="center">
-<img src="http://cefns.nau.edu/~jk788/assets/splash.png" /><br/>
+<img src="http://cefns.nau.edu/~jk788/assets/UnfinishedThoroughAndeancondor.gif" /><br/>
 <small>
-    <i>App screen shot with redacted cover art to avoid any legal issues...</i>
+    <i>Simple App Preview...</i>
 </small>
 </p>
 
